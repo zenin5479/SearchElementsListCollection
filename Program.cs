@@ -36,7 +36,10 @@ namespace SearchElementsListCollection
                 throw new ArgumentNullException("source");
 
             var num = source.GetObjectsWithField(field)
-                .Sum(leg => (int)(dynamic)leg.GetType().GetField(field).GetValue(leg));
+                .Sum(leg => (int)((dynamic)leg
+                    .GetType()
+                    .GetField(field)!
+                    .GetValue(leg))!);
 
             return num;
         }
